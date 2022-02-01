@@ -20,15 +20,24 @@ function App(){
         email: "",
         password: ""
     })
+
     const [erro, setErro] = useState()
     const [success, setSuccess] = useState(false);
 
     const [acc, setAcc] = useState(0)
 
 
+
+
+
+    function changeHandler (e) {
+        const newData={...data}
+        newData [e.target.name] = e.target.value
+        setData(newData)
+    }
     useEffect(() =>
     {
-         axios.get('https://api.englishpatient.org/users/me ', {
+        axios.get('https://api.englishpatient.org/users/me ', {
             headers: {
                 header: 'Content-Type: application/json',
                 authorization: `${token}`
@@ -45,21 +54,11 @@ function App(){
 
             })
 
-    })
+    },[token])
 
-
-    function changeHandler (e) {
-        const newData={...data}
-        newData [e.target.name] = e.target.value
-        setData(newData)
-
-    }
-
-
-
-    const submitHandler = async (e) => {
+    const submitHandler = (e) => {
         e.preventDefault()
-        await axios
+        axios
             .post('https://api.englishpatient.org/login',
                 {
                     email: data.email,
@@ -107,6 +106,8 @@ function App(){
                             token={token}
                             submitHandlerr={submitHandlerr}
                             erro={erro}
+
+
                         />
 
                     }/>

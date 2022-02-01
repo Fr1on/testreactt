@@ -6,7 +6,7 @@ import {useRouteMatch} from "react-router-dom";
 import App from "../../App";
 
 
-function Login({submitHandler, data, changeHandler, token, submitHandlerr, erro }){
+function Login({submitHandler, data, changeHandler, token, submitHandlerr, erro, }){
 
 
 
@@ -41,7 +41,7 @@ function Login({submitHandler, data, changeHandler, token, submitHandlerr, erro 
                         </p>
                         {erro}
                     </div>
-                    <button type='submit' className={classes.button}> Войти</button>
+                    <button type='submit' className={classes.button} > Войти</button>
                 </form>
                 </section>
 
