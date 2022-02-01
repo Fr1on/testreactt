@@ -1,52 +1,65 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useRef} from 'react';
 import classes from './Login.module.css'
-import styled from "styled-components";
-import axios from "axios";
-import {useRouteMatch} from "react-router-dom";
-import App from "../../App";
+
+import {useDispatch} from "react-redux";
+import {postUser, setEmail, setPassword} from "../store/authSlice";
 
 
-function Login({submitHandler, data, changeHandler, token, submitHandlerr, erro }){
+function Login({submitHandlerr, succes, navigate}){
 
+    const dispatch = useDispatch();
 
-
+        const submitHandler = (event) => {
+            event.preventDefault();
+            const email = $email.current.value;
+            const password = $password.current.value;
+            dispatch(postUser({email, password}))
+        }
+    const $email = useRef(null)
+    const $password = useRef(null)
     return (
 
         <div className={classes.column}>
-
-            { token !== undefined  ? (
+            {localStorage.getItem('token') === 'undefined'||  localStorage.getItem('token') === null ? (
                 <section>
-                <div>
-                    <form action="" onSubmit={submitHandlerr}>
-                    <p>Вы авторизовались</p>
-                        <button type='submit' className={classes.button}> Выйти</button>
+                    <form action="" onSubmit={submitHandler}>
+                        <h3>Авторизация</h3>
+                        <div className={classes.qwe}>
+                            <p>Email
+                                <input className={classes.input}
+                                       type='email'
+                                       name='email'
+                                       ref={$email}
+                                />
+
+                            </p>
+                        </div>
+                        <div className={classes.qwe}>
+                            <p>Password
+                                <input className={classes.input}
+                                       name='password'
+                                       type='password'
+                                       ref={$password}/>
+                            </p>
+
+                        </div>
+                        <button type='submit' className={classes.button}> Войти</button>
                     </form>
-                </div>
                 </section>
             ) : (
                 <section>
-                <form action="" onSubmit={submitHandler}>
-                    <h3>Авторизация</h3>
-                    <div className={classes.qwe}>
-                        <p>Email
-                            <input className={classes.input} type='email' name='email' value={data.email}
-                                   onChange={changeHandler}/>
-
-                        </p>
+                    <div>
+                        <form action="" onSubmit={submitHandlerr}>
+                            <p>Вы авторизовались</p>
+                            <button type='submit' className={classes.button}> Выйти</button>
+                        </form>
                     </div>
-                    <div className={classes.qwe}>
-                        <p>Password
-                            <input className={classes.input} name='password' type='password' value={data.password}
-                                   onChange={changeHandler}/>
-                        </p>
-                        {erro}
-                    </div>
-                    <button type='submit' className={classes.button}> Войти</button>
-                </form>
                 </section>
+
 
             )}
         </div>
+
 
     );
 

@@ -18,14 +18,14 @@
     margin: 0px;
 }
 .button{
-    color: black; /* цвет текста */
-    text-decoration: none; /* убирать подчёркивание у ссылок */
-    user-select: none; /* убирать выделение текста */
-    background: white; /* фон кнопки */
-    padding: .7em 1.5em; /* отступ от текста */
-    outline: none; /* убирать контур в Mozilla */
+    color: black;
+    text-decoration: none;
+    user-select: none;
+    background: white;
+    padding: .7em 1.5em;
+    outline: none;
     border-radius: 10px;
 
 }
-.button:hover { background: darkgray; } /* при наведении курсора мышки */
-.button:active { background: grey; } /* при нажатии */
+.button:hover { background: darkgray; }
+.button:active { background: grey; }
