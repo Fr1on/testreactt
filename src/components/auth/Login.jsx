@@ -3,24 +3,28 @@ import classes from './Login.module.css'
 
 import {useDispatch} from "react-redux";
 import {postUser, setEmail, setPassword} from "../store/authSlice";
+import {Navigate, Route} from "react-router-dom";
 
 
-function Login({submitHandlerr, succes, navigate}){
+
+function Login({submitHandlerr, succes, navigate}) {
 
     const dispatch = useDispatch();
 
-        const submitHandler = (event) => {
-            event.preventDefault();
-            const email = $email.current.value;
-            const password = $password.current.value;
-            dispatch(postUser({email, password}))
-        }
+    const submitHandler = (event) => {
+        event.preventDefault();
+        const email = $email.current.value;
+        const password = $password.current.value;
+        dispatch(postUser({email, password}))
+        return navigate('/')
+    }
+
     const $email = useRef(null)
     const $password = useRef(null)
     return (
 
         <div className={classes.column}>
-            {localStorage.getItem('token') === 'undefined'||  localStorage.getItem('token') === null ? (
+            {localStorage.getItem('token') === 'undefined' || localStorage.getItem('token') === null ? (
                 <section>
                     <form action="" onSubmit={submitHandler}>
                         <h3>Авторизация</h3>
